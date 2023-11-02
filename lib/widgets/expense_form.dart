@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:personal_expenses/controllers/expense_controller.dart';
 
-class ModalForm extends StatelessWidget {
-  const ModalForm({
+class ExpenseForm extends StatelessWidget {
+  const ExpenseForm({
     super.key,
     required this.formKey,
     required this.title,
