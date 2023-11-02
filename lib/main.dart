@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:personal_expenses/controllers/expense_controller.dart';
 import 'package:personal_expenses/widgets/expense_card.dart';
-import 'package:personal_expenses/widgets/modal_form.dart';
+import 'package:personal_expenses/widgets/expense_form.dart';
+import 'package:personal_expenses/widgets/expenses_list.dart';
 
 void main() {
   runApp(const MyApp());
@@ -43,19 +44,14 @@ class _MyHomePageState extends State<MyHomePage> {
       body: AnimatedBuilder(
         animation: _expenseController,
         builder: (context, child) {
-          return Stack(children: [
-            ListView(
-                children: _expenseController.expenses
-                    .map((e) => ExpenseCard(expense: e))
-                    .toList()),
-          ]);
+          return ExpensesList(expenseController: _expenseController);
         },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => {
           showModalBottomSheet(
             context: context,
-            builder: (context) => ModalForm(
+            builder: (context) => ExpenseForm(
                 formKey: formKey,
                 title: title,
                 value: value,
