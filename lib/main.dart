@@ -44,7 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
         animation: _expenseController,
         builder: (context, child) {
           return Stack(children: [
-            Column(
+            ListView(
                 children: _expenseController.expenses
                     .map((e) => ExpenseCard(expense: e))
                     .toList()),
