@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:personal_expenses/models/expense_model.dart';
 
 class ExpenseController extends ChangeNotifier {
-  static ExpenseController instance = ExpenseController();
-
   List<Expense> expenses = [];
 
   void addExpense({

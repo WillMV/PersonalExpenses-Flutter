@@ -26,7 +26,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final ExpenseController _expenseController = ExpenseController.instance;
+  final ExpenseController _expenseController = ExpenseController();
 
   final formKey = GlobalKey<FormState>();
   final title = TextEditingController();
