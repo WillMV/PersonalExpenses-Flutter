@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:personal_expenses/controllers/expense_controller.dart';
 import 'package:personal_expenses/models/expense_model.dart';
 
 class ExpenseCard extends StatefulWidget {
@@ -12,6 +13,8 @@ class ExpenseCard extends StatefulWidget {
 }
 
 class _ExpenseCardState extends State<ExpenseCard> {
+  ExpenseController expenseController = ExpenseController.instance;
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -41,6 +44,16 @@ class _ExpenseCardState extends State<ExpenseCard> {
                 )
               ],
             ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 8),
+            child: IconButton(
+                onPressed: () =>
+                    expenseController.removeExpense(widget.expense),
+                icon: const Icon(
+                  Icons.delete,
+                  color: Colors.redAccent,
+                )),
           )
         ],
       ),
