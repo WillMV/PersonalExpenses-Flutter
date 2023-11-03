@@ -21,6 +21,9 @@ class ExpenseForm extends StatelessWidget {
     if (formKey.currentState!.validate()) {
       _expenseController.addExpense(
           title: title.text, value: value.text, date: date.text);
+      title.clear();
+      value.clear();
+      date.clear();
     }
   }
 
