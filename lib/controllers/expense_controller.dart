@@ -9,8 +9,7 @@ class ExpenseController extends ChangeNotifier {
     required double value,
     required String date,
   }) {
-    Expense expense =
-        Expense(id: expenses.length, title: title, value: value, date: date);
+    Expense expense = Expense(id: expenses.length, title: title, value: value);
     expenses.add(expense);
     notifyListeners();
   }

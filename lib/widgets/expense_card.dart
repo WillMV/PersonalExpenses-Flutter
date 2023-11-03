@@ -16,9 +16,30 @@ class _ExpenseCardState extends State<ExpenseCard> {
     return Card(
       child: Row(
         children: [
-          Text(widget.expense.value.toString()),
-          Column(
-            children: [Text(widget.expense.title), Text(widget.expense.date)],
+          Container(
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black, width: 2)),
+              padding: const EdgeInsets.all(10),
+              margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+              child: Text("R\$ ${widget.expense.value.toStringAsFixed(2)}")),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    widget.expense.title,
+                    style: const TextStyle(
+                        fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Text(
+                  widget.expense.date.toString(),
+                  style: const TextStyle(color: Colors.grey),
+                )
+              ],
+            ),
           )
         ],
       ),
