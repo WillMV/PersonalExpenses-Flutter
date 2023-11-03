@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:personal_expenses/models/expense_model.dart';
 
 class ExpenseCard extends StatefulWidget {
@@ -35,7 +36,7 @@ class _ExpenseCardState extends State<ExpenseCard> {
                   ),
                 ),
                 Text(
-                  widget.expense.date.toString(),
+                  DateFormat('dd MMM y').format(widget.expense.date),
                   style: const TextStyle(color: Colors.grey),
                 )
               ],
