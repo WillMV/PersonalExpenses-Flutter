@@ -17,6 +17,13 @@ class ExpenseForm extends StatelessWidget {
   final TextEditingController date;
   final ExpenseController _expenseController;
 
+  void _onSubmit() {
+    if (formKey.currentState!.validate()) {
+      _expenseController.addExpense(
+          title: title.text, value: value.text, date: date.text);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -30,6 +37,8 @@ class ExpenseForm extends StatelessWidget {
                 child: TextFormField(
                   controller: title,
                   autocorrect: true,
+                  enableSuggestions: true,
+                  onFieldSubmitted: (_) => _onSubmit(),
                   validator: (value) =>
                       value!.isEmpty ? 'Plese insert a title' : null,
                   decoration: const InputDecoration(
@@ -42,6 +51,7 @@ class ExpenseForm extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
                   controller: value,
+                  onFieldSubmitted: (_) => _onSubmit(),
                   keyboardType: TextInputType.number,
                   autocorrect: true,
                   validator: (value) =>
@@ -75,14 +85,7 @@ class ExpenseForm extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
-                    onPressed: () {
-                      if (formKey.currentState!.validate()) {
-                        _expenseController.addExpense(
-                            title: title.text,
-                            value: double.parse(value.text),
-                            date: date.text);
-                      }
-                    },
+                    onPressed: () => _onSubmit(),
                     child: const Center(
                         child: Padding(
                       padding: EdgeInsets.all(20.0),
