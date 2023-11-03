@@ -2,7 +2,7 @@ class Expense {
   final int id;
   final String title;
   final double value;
-  final String date;
+  final DateTime date;
 
   Expense({
     required this.id,
