@@ -28,11 +28,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final ExpenseController _expenseController = ExpenseController.instance;
 
-  final formKey = GlobalKey<FormState>();
-  final title = TextEditingController();
-  final value = TextEditingController();
-  final date = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,12 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: () => {
           showModalBottomSheet(
             context: context,
-            builder: (context) => ExpenseForm(
-                formKey: formKey,
-                title: title,
-                value: value,
-                date: date,
-                expenseController: _expenseController),
+            builder: (context) => ExpenseForm(),
           )
         },
         tooltip: 'add expense',

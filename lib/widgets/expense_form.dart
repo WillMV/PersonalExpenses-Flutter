@@ -2,20 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:personal_expenses/controllers/expense_controller.dart';
 
 class ExpenseForm extends StatelessWidget {
-  const ExpenseForm({
+  ExpenseForm({
     super.key,
-    required this.formKey,
-    required this.title,
-    required this.value,
-    required this.date,
-    required ExpenseController expenseController,
-  }) : _expenseController = expenseController;
+  });
 
-  final GlobalKey<FormState> formKey;
-  final TextEditingController title;
-  final TextEditingController value;
-  final TextEditingController date;
-  final ExpenseController _expenseController;
+  final ExpenseController _expenseController = ExpenseController.instance;
+  final formKey = GlobalKey<FormState>();
+  final title = TextEditingController();
+  final value = TextEditingController();
+  final date = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -66,26 +61,26 @@ class ExpenseForm extends StatelessWidget {
                   ),
                 ),
               ),
-              // Padding(
-              //   padding: const EdgeInsets.all(8.0),
-              //   child: TextFormField(
-              //     controller: date,
-              //     keyboardType: TextInputType.datetime,
-              //     validator: (value) {
-              //       if (value!.isEmpty ||
-              //           value.length < 8 ||
-              //           value.length > 10) {
-              //         return "Plese insert a valid date in format DD/MM/YYYY";
-              //       }
-              //       return null;
-              //     },
-              //     autocorrect: true,
-              //     decoration: const InputDecoration(
-              //       labelText: 'Date',
-              //       border: OutlineInputBorder(),
-              //     ),
-              //   ),
-              // ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextFormField(
+                  controller: date,
+                  keyboardType: TextInputType.datetime,
+                  validator: (value) {
+                    if (value!.isEmpty ||
+                        value.length < 8 ||
+                        value.length > 10) {
+                      return "Plese insert a valid date in format DD/MM/YYYY";
+                    }
+                    return null;
+                  },
+                  autocorrect: true,
+                  decoration: const InputDecoration(
+                    labelText: 'Date',
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
