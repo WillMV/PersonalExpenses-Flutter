@@ -12,8 +12,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: MyHomePage(),
+    final ThemeData theme = ThemeData(fontFamily: 'Quicksand');
+    return MaterialApp(
+      theme: theme.copyWith(
+        colorScheme: theme.colorScheme.copyWith(
+            primary: Colors.deepPurple, secondary: Colors.deepOrangeAccent),
+      ),
+      home: const MyHomePage(),
     );
   }
 }
