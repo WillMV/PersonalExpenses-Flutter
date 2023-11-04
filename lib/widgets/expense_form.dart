@@ -1,15 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:personal_expenses/controllers/expense_controller.dart';
 
-class ExpenseForm extends StatelessWidget {
-  ExpenseForm({
+class ExpenseForm extends StatefulWidget {
+  const ExpenseForm({
     super.key,
   });
 
+  @override
+  State<ExpenseForm> createState() => _ExpenseFormState();
+}
+
+class _ExpenseFormState extends State<ExpenseForm> {
   final ExpenseController _expenseController = ExpenseController.instance;
+
   final formKey = GlobalKey<FormState>();
+
   final title = TextEditingController();
+
   final value = TextEditingController();
+
   final date = TextEditingController();
 
   @override
