@@ -8,16 +8,16 @@ class ExpenseController extends ChangeNotifier {
 
   void addExpense({
     required String title,
-    required double value,
+    required String value,
     required String date,
   }) {
-    Expense expense =
-        Expense(id: expenses.length, title: title, value: value, date: date);
+    Expense expense = Expense(id: expenses.length, title: title, value: value);
     expenses.add(expense);
     notifyListeners();
   }
 
-  removeExpense() {
-    throw NoSuchMethodError;
+  removeExpense(Expense expense) {
+    expenses.remove(expense);
+    notifyListeners();
   }
 }
