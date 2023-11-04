@@ -17,18 +17,19 @@ class ExpenseForm extends StatelessWidget {
   final TextEditingController date;
   final ExpenseController _expenseController;
 
-  void _onSubmit() {
-    if (formKey.currentState!.validate()) {
-      _expenseController.addExpense(
-          title: title.text, value: value.text, date: date.text);
-      title.clear();
-      value.clear();
-      date.clear();
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
+    void onSubmit() {
+      if (formKey.currentState!.validate()) {
+        _expenseController.addExpense(
+            title: title.text, value: value.text, date: date.text);
+        title.clear();
+        value.clear();
+        date.clear();
+        Navigator.of(context).pop();
+      }
+    }
+
     return Form(
         key: formKey,
         child: Padding(
@@ -41,7 +42,7 @@ class ExpenseForm extends StatelessWidget {
                   controller: title,
                   autocorrect: true,
                   enableSuggestions: true,
-                  onFieldSubmitted: (_) => _onSubmit(),
+                  onFieldSubmitted: (_) => onSubmit(),
                   validator: (value) =>
                       value!.isEmpty ? 'Plese insert a title' : null,
                   decoration: const InputDecoration(
@@ -54,7 +55,7 @@ class ExpenseForm extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
                   controller: value,
-                  onFieldSubmitted: (_) => _onSubmit(),
+                  onFieldSubmitted: (_) => onSubmit(),
                   keyboardType: TextInputType.number,
                   autocorrect: true,
                   validator: (value) =>
@@ -65,30 +66,30 @@ class ExpenseForm extends StatelessWidget {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextFormField(
-                  controller: date,
-                  keyboardType: TextInputType.datetime,
-                  validator: (value) {
-                    if (value!.isEmpty ||
-                        value.length < 8 ||
-                        value.length > 10) {
-                      return "Plese insert a valid date in format DD/MM/YYYY";
-                    }
-                    return null;
-                  },
-                  autocorrect: true,
-                  decoration: const InputDecoration(
-                    labelText: 'Date',
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.all(8.0),
+              //   child: TextFormField(
+              //     controller: date,
+              //     keyboardType: TextInputType.datetime,
+              //     validator: (value) {
+              //       if (value!.isEmpty ||
+              //           value.length < 8 ||
+              //           value.length > 10) {
+              //         return "Plese insert a valid date in format DD/MM/YYYY";
+              //       }
+              //       return null;
+              //     },
+              //     autocorrect: true,
+              //     decoration: const InputDecoration(
+              //       labelText: 'Date',
+              //       border: OutlineInputBorder(),
+              //     ),
+              //   ),
+              // ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
-                    onPressed: () => _onSubmit(),
+                    onPressed: () => onSubmit(),
                     child: const Center(
                         child: Padding(
                       padding: EdgeInsets.all(20.0),
