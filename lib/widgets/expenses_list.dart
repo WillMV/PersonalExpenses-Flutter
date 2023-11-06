@@ -12,9 +12,12 @@ class ExpensesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        itemCount: _expenseController.expenses.length,
-        itemBuilder: (context, index) =>
-            ExpenseCard(expense: _expenseController.expenses[index]));
+    return SizedBox(
+      height: MediaQuery.sizeOf(context).height - 100,
+      child: ListView.builder(
+          itemCount: _expenseController.expenses.length,
+          itemBuilder: (context, index) =>
+              ExpenseCard(expense: _expenseController.expenses[index])),
+    );
   }
 }

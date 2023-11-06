@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:personal_expenses/controllers/expense_controller.dart';
+import 'package:personal_expenses/widgets/chart.dart';
 import 'package:personal_expenses/widgets/expense_form.dart';
 import 'package:personal_expenses/widgets/expenses_list.dart';
 
@@ -65,7 +66,14 @@ class _MyHomePageState extends State<MyHomePage> {
                     )
                   ],
                 ))
-              : ExpensesList(expenseController: _expenseController);
+              : SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      const Chart(),
+                      ExpensesList(expenseController: _expenseController),
+                    ],
+                  ),
+                );
         },
       ),
       floatingActionButton: FloatingActionButton(
