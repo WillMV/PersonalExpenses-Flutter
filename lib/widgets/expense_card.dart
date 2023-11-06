@@ -25,7 +25,7 @@ class _ExpenseCardState extends State<ExpenseCard> {
                   border: Border.all(color: Colors.black, width: 2)),
               padding: const EdgeInsets.all(10),
               margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-              child: Text("R\$ ${widget.expense.value.toStringAsFixed(2)}")),
+              child: Text("\$ ${widget.expense.value.toStringAsFixed(2)}")),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
