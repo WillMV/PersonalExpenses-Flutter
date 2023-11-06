@@ -69,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
               : SingleChildScrollView(
                   child: Column(
                     children: [
-                      const Chart(),
+                      Chart(expenseController: _expenseController),
                       ExpensesList(expenseController: _expenseController),
                     ],
                   ),
