@@ -43,14 +43,36 @@ class _MyHomePageState extends State<MyHomePage> {
       body: AnimatedBuilder(
         animation: _expenseController,
         builder: (context, child) {
-          return ExpensesList(expenseController: _expenseController);
+          return _expenseController.expenses.isEmpty
+              ? Center(
+                  child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'No registered expenses',
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                    ),
+                    const SizedBox(
+                      height: 50,
+                    ),
+                    SizedBox(
+                      height: 200,
+                      child: Image.asset(
+                        'assets/images/waiting.png',
+                        fit: BoxFit.contain,
+                      ),
+                    )
+                  ],
+                ))
+              : ExpensesList(expenseController: _expenseController);
         },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => {
           showModalBottomSheet(
             context: context,
-            builder: (context) => ExpenseForm(),
+            builder: (context) => const ExpenseForm(),
           )
         },
         tooltip: 'add expense',
