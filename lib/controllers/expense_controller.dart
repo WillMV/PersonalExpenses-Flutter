@@ -9,15 +9,20 @@ class ExpenseController extends ChangeNotifier {
   void addExpense({
     required String title,
     required String value,
-    required String date,
+    required DateTime date,
   }) {
-    Expense expense = Expense(id: expenses.length, title: title, value: value);
+    Expense expense =
+        Expense(id: expenses.length, title: title, value: value, date: date);
     expenses.add(expense);
     notifyListeners();
   }
 
-  removeExpense(Expense expense) {
+  void removeExpense(Expense expense) {
     expenses.remove(expense);
     notifyListeners();
+  }
+
+  List<Expense> getExpensesAfterDay(DateTime day) {
+    return expenses.where((expense) => expense.date.isAfter(day)).toList();
   }
 }

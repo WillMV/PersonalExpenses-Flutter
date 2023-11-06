@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:personal_expenses/controllers/expense_controller.dart';
+import 'package:personal_expenses/widgets/chart.dart';
 import 'package:personal_expenses/widgets/expense_form.dart';
 import 'package:personal_expenses/widgets/expenses_list.dart';
 
@@ -12,8 +13,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: MyHomePage(),
+    final ThemeData theme = ThemeData(fontFamily: 'Quicksand');
+    return MaterialApp(
+      theme: theme.copyWith(
+        colorScheme: theme.colorScheme.copyWith(
+            primary: Colors.deepPurple, secondary: Colors.deepOrangeAccent),
+      ),
+      home: const MyHomePage(),
     );
   }
 }
@@ -38,14 +44,43 @@ class _MyHomePageState extends State<MyHomePage> {
       body: AnimatedBuilder(
         animation: _expenseController,
         builder: (context, child) {
-          return ExpensesList(expenseController: _expenseController);
+          return _expenseController.expenses.isEmpty
+              ? Center(
+                  child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'No registered expenses',
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                    ),
+                    const SizedBox(
+                      height: 50,
+                    ),
+                    SizedBox(
+                      height: 200,
+                      child: Image.asset(
+                        'assets/images/waiting.png',
+                        fit: BoxFit.contain,
+                      ),
+                    )
+                  ],
+                ))
+              : SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Chart(expenseController: _expenseController),
+                      ExpensesList(expenseController: _expenseController),
+                    ],
+                  ),
+                );
         },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => {
           showModalBottomSheet(
             context: context,
-            builder: (context) => ExpenseForm(),
+            builder: (context) => const ExpenseForm(),
           )
         },
         tooltip: 'add expense',
