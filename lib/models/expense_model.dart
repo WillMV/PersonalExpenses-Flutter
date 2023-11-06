@@ -2,15 +2,12 @@ class Expense {
   final int id;
   late final String _title;
   late final String _value;
-  final DateTime date = DateTime.now();
+  late final DateTime _date;
 
-  Expense({
-    required this.id,
-    required title,
-    required value,
-  }) {
+  Expense({required this.id, required title, required value, required date}) {
     _title = title;
     _value = value;
+    _date = date;
   }
 
   String get title {
@@ -22,5 +19,9 @@ class Expense {
   double get value {
     final double value = double.parse(_value.replaceFirst(RegExp(r','), '.'));
     return value;
+  }
+
+  DateTime get date {
+    return _date;
   }
 }

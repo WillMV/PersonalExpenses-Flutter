@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:personal_expenses/controllers/expense_controller.dart';
 
 class ExpenseForm extends StatefulWidget {
@@ -15,21 +16,33 @@ class _ExpenseFormState extends State<ExpenseForm> {
 
   final formKey = GlobalKey<FormState>();
 
-  final title = TextEditingController();
+  final title = TextEditingController(text: 'mercado');
 
-  final value = TextEditingController();
+  final value = TextEditingController(text: '12.3');
 
-  final date = TextEditingController();
+  DateTime? _date;
+
+  void _selectDate() async {
+    DateTime? pickedDate = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(2020),
+        lastDate: DateTime.now());
+    if (pickedDate != null) {
+      setState(() {
+        _date = pickedDate;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     void onSubmit() {
-      if (formKey.currentState!.validate()) {
+      if (formKey.currentState!.validate() && _date != null) {
         _expenseController.addExpense(
-            title: title.text, value: value.text, date: date.text);
+            title: title.text, value: value.text, date: _date!);
         title.clear();
         value.clear();
-        date.clear();
         Navigator.of(context).pop();
       }
     }
@@ -71,23 +84,17 @@ class _ExpenseFormState extends State<ExpenseForm> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextFormField(
-                  controller: date,
-                  keyboardType: TextInputType.datetime,
-                  validator: (value) {
-                    if (value!.isEmpty ||
-                        value.length < 8 ||
-                        value.length > 10) {
-                      return "Plese insert a valid date in format DD/MM/YYYY";
-                    }
-                    return null;
-                  },
-                  autocorrect: true,
-                  decoration: const InputDecoration(
-                    labelText: 'Date',
-                    border: OutlineInputBorder(),
-                  ),
+                padding: const EdgeInsets.all(10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(_date == null
+                        ? 'No date selected'
+                        : DateFormat('dd MMM y').format(_date!)),
+                    ElevatedButton(
+                        onPressed: _selectDate,
+                        child: const Text('Select date'))
+                  ],
                 ),
               ),
               Padding(
@@ -97,7 +104,7 @@ class _ExpenseFormState extends State<ExpenseForm> {
                     child: const Center(
                         child: Padding(
                       padding: EdgeInsets.all(20.0),
-                      child: Text('Add'),
+                      child: Text('Add Expense'),
                     ))),
               )
             ],
