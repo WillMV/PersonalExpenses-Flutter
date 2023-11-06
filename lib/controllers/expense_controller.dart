@@ -17,8 +17,12 @@ class ExpenseController extends ChangeNotifier {
     notifyListeners();
   }
 
-  removeExpense(Expense expense) {
+  void removeExpense(Expense expense) {
     expenses.remove(expense);
     notifyListeners();
+  }
+
+  List<Expense> getExpensesAfterDay(DateTime day) {
+    return expenses.where((expense) => expense.date.isAfter(day)).toList();
   }
 }
