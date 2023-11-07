@@ -6,7 +6,6 @@ import 'package:personal_expenses/screens/protrait_home.dart';
 import 'package:personal_expenses/widgets/chart.dart';
 import 'package:personal_expenses/widgets/empty_expenses.dart';
 import 'package:personal_expenses/widgets/expense_form.dart';
-import 'package:personal_expenses/widgets/expenses_list.dart';
 
 void main() {
   runApp(const MyApp());
