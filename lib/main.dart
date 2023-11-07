@@ -37,11 +37,15 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final appbar = AppBar(
+      title: const Text('Expenses'),
+      centerTitle: true,
+    );
+    final double availableheight = MediaQuery.of(context).size.height -
+        appbar.preferredSize.height -
+        MediaQuery.of(context).padding.top;
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Expenses'),
-        centerTitle: true,
-      ),
+      appBar: appbar,
       body: AnimatedBuilder(
         animation: _expenseController,
         builder: (context, child) {
@@ -50,8 +54,15 @@ class _MyHomePageState extends State<MyHomePage> {
               : SingleChildScrollView(
                   child: Column(
                     children: [
-                      Chart(expenseController: _expenseController),
-                      ExpensesList(expenseController: _expenseController),
+                      SizedBox(
+                        height: availableheight * 0.5,
+                        child: Chart(expenseController: _expenseController),
+                      ),
+                      SizedBox(
+                        height: availableheight * 0.5,
+                        child:
+                            ExpensesList(expenseController: _expenseController),
+                      ),
                     ],
                   ),
                 );
