@@ -18,42 +18,23 @@ class _ExpenseCardState extends State<ExpenseCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Row(
-        children: [
-          Container(
-              decoration: BoxDecoration(
-                  border: Border.all(color: Colors.black, width: 2)),
-              padding: const EdgeInsets.all(10),
-              margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-              child: Text("R\$ ${widget.expense.value.toStringAsFixed(2)}")),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Text(
-                  widget.expense.title,
-                  style: const TextStyle(
-                      fontSize: 16, fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  DateFormat('dd MMM y').format(widget.expense.date),
-                  style: const TextStyle(color: Colors.grey),
-                )
-              ],
+        child: ListTile(
+      leading: CircleAvatar(
+        child: Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: FittedBox(
+            child: Text(
+              widget.expense.value.toStringAsFixed(2),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(right: 8),
-            child: IconButton(
-                onPressed: () =>
-                    expenseController.removeExpense(widget.expense),
-                icon: const Icon(
-                  Icons.delete,
-                  color: Colors.redAccent,
-                )),
-          )
-        ],
+        ),
       ),
-    );
+      title: Text(widget.expense.title),
+      subtitle: Text((DateFormat('d MMM y').format(widget.expense.date))),
+      trailing: IconButton(
+        icon: const Icon(Icons.delete),
+        onPressed: () => expenseController.removeExpense(widget.expense),
+      ),
+    ));
   }
 }

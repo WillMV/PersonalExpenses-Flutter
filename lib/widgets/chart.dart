@@ -26,7 +26,7 @@ class _ChartState extends State<Chart> {
         return 0.0;
       }).reduce((a, b) => a + b);
       return {'day': DateFormat.E().format(weekDay)[0], 'value': sumValue};
-    });
+    }).reversed.toList();
   }
 
   double get weekValueTotal {
