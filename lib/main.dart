@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:personal_expenses/controllers/expense_controller.dart';
-import 'package:personal_expenses/widgets/chart.dart';
+import 'package:personal_expenses/screens/protrait_home.dart';
 import 'package:personal_expenses/widgets/empty_expenses.dart';
 import 'package:personal_expenses/widgets/expense_form.dart';
-import 'package:personal_expenses/widgets/expenses_list.dart';
 
 void main() {
   runApp(const MyApp());
@@ -51,20 +50,9 @@ class _MyHomePageState extends State<MyHomePage> {
         builder: (context, child) {
           return _expenseController.expenses.isEmpty
               ? const EmptyExpenses()
-              : SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: availableheight * 0.2,
-                        child: Chart(expenseController: _expenseController),
-                      ),
-                      SizedBox(
-                        height: availableheight * 0.8,
-                        child:
-                            ExpensesList(expenseController: _expenseController),
-                      ),
-                    ],
-                  ),
+              : PortraitHomePage(
+                  availableheight: availableheight,
+                  expenseController: _expenseController,
                 );
         },
       ),
