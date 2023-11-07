@@ -55,11 +55,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Column(
                     children: [
                       SizedBox(
-                        height: availableheight * 0.5,
+                        height: availableheight * 0.2,
                         child: Chart(expenseController: _expenseController),
                       ),
                       SizedBox(
-                        height: availableheight * 0.5,
+                        height: availableheight * 0.8,
                         child:
                             ExpensesList(expenseController: _expenseController),
                       ),
