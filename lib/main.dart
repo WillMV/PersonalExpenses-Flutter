@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:personal_expenses/controllers/expense_controller.dart';
+import 'package:personal_expenses/screens/landscape_home.dart';
+import 'package:personal_expenses/screens/protrait_home.dart';
 import 'package:personal_expenses/widgets/chart.dart';
 import 'package:personal_expenses/widgets/empty_expenses.dart';
 import 'package:personal_expenses/widgets/expense_form.dart';
@@ -37,13 +40,18 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final isPortrait =
+        MediaQuery.of(context).orientation == Orientation.portrait;
+
     final appbar = AppBar(
       title: const Text('Expenses'),
       centerTitle: true,
     );
-    final double availableheight = MediaQuery.of(context).size.height -
+
+    final double availableHeight = MediaQuery.of(context).size.height -
         appbar.preferredSize.height -
         MediaQuery.of(context).padding.top;
+
     return Scaffold(
       appBar: appbar,
       body: AnimatedBuilder(
@@ -51,21 +59,15 @@ class _MyHomePageState extends State<MyHomePage> {
         builder: (context, child) {
           return _expenseController.expenses.isEmpty
               ? const EmptyExpenses()
-              : SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: availableheight * 0.2,
-                        child: Chart(expenseController: _expenseController),
-                      ),
-                      SizedBox(
-                        height: availableheight * 0.8,
-                        child:
-                            ExpensesList(expenseController: _expenseController),
-                      ),
-                    ],
-                  ),
-                );
+              : isPortrait
+                  ? PortraitHomePage(
+                      availableHeight: availableHeight,
+                      expenseController: _expenseController,
+                    )
+                  : LandscapeHomePage(
+                      availableHeight: availableHeight,
+                      expenseController: _expenseController,
+                    );
         },
       ),
       floatingActionButton: FloatingActionButton(

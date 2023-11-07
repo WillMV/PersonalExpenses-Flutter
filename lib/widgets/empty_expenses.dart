@@ -7,25 +7,27 @@ class EmptyExpenses extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-        child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const Text(
-          'No registered expenses',
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-        ),
-        const SizedBox(
-          height: 50,
-        ),
-        SizedBox(
-          height: 200,
-          child: Image.asset(
-            'assets/images/waiting.png',
-            fit: BoxFit.contain,
+    return LayoutBuilder(
+      builder: (context, constraints) => Center(
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Text(
+            'No registered expenses',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
           ),
-        )
-      ],
-    ));
+          SizedBox(
+            height: constraints.maxHeight * 0.1,
+          ),
+          SizedBox(
+            height: constraints.maxHeight * 0.4,
+            child: Image.asset(
+              'assets/images/waiting.png',
+              fit: BoxFit.contain,
+            ),
+          )
+        ],
+      )),
+    );
   }
 }
