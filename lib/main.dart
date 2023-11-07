@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:personal_expenses/controllers/expense_controller.dart';
 import 'package:personal_expenses/widgets/chart.dart';
+import 'package:personal_expenses/widgets/empty_expenses.dart';
 import 'package:personal_expenses/widgets/expense_form.dart';
 import 'package:personal_expenses/widgets/expenses_list.dart';
 
@@ -45,27 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
         animation: _expenseController,
         builder: (context, child) {
           return _expenseController.expenses.isEmpty
-              ? Center(
-                  child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      'No registered expenses',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                    ),
-                    const SizedBox(
-                      height: 50,
-                    ),
-                    SizedBox(
-                      height: 200,
-                      child: Image.asset(
-                        'assets/images/waiting.png',
-                        fit: BoxFit.contain,
-                      ),
-                    )
-                  ],
-                ))
+              ? const EmptyExpenses()
               : SingleChildScrollView(
                   child: Column(
                     children: [
