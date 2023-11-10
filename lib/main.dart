@@ -73,6 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: () => {
           showModalBottomSheet(
             context: context,
+            isScrollControlled: true,
             builder: (context) => const ExpenseForm(),
           )
         },
