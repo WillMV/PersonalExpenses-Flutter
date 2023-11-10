@@ -39,17 +39,18 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final isPortrait =
-        MediaQuery.of(context).orientation == Orientation.portrait;
+    final mediaQuery = MediaQuery.of(context);
+
+    final isPortrait = mediaQuery.orientation == Orientation.portrait;
 
     final appbar = AppBar(
       title: const Text('Expenses'),
       centerTitle: true,
     );
 
-    final double availableHeight = MediaQuery.of(context).size.height -
+    final double availableHeight = mediaQuery.size.height -
         appbar.preferredSize.height -
-        MediaQuery.of(context).padding.top;
+        mediaQuery.padding.top;
 
     return Scaffold(
       appBar: appbar,
