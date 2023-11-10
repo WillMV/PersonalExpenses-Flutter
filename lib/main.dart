@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:personal_expenses/controllers/expense_controller.dart';
 import 'package:personal_expenses/screens/landscape_home.dart';
 import 'package:personal_expenses/screens/protrait_home.dart';
-import 'package:personal_expenses/widgets/chart.dart';
 import 'package:personal_expenses/widgets/empty_expenses.dart';
 import 'package:personal_expenses/widgets/expense_form.dart';
 
@@ -37,15 +35,35 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final ExpenseController _expenseController = ExpenseController.instance;
 
+  bool showChart = true;
+
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
-
     final isPortrait = mediaQuery.orientation == Orientation.portrait;
+    final availableWidth = mediaQuery.size.width;
+
+    final isSmallScreen = !isPortrait
+        ? mediaQuery.size.width < 800
+            ? true
+            : false
+        : false;
 
     final appbar = AppBar(
       title: const Text('Expenses'),
       centerTitle: true,
+      actions: [
+        if (!isPortrait & isSmallScreen)
+          IconButton(
+              onPressed: () {
+                setState(() {
+                  showChart = !showChart;
+                });
+              },
+              icon: Icon(showChart
+                  ? Icons.line_weight_sharp
+                  : Icons.bar_chart_rounded))
+      ],
     );
 
     final double availableHeight = mediaQuery.size.height -
@@ -65,7 +83,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       expenseController: _expenseController,
                     )
                   : LandscapeHomePage(
+                      showChart: showChart,
+                      isSmallScreen: isSmallScreen,
                       availableHeight: availableHeight,
+                      availableWidth: availableWidth,
                       expenseController: _expenseController,
                     );
         },

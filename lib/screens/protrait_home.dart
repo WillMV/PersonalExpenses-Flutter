@@ -19,11 +19,11 @@ class PortraitHomePage extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(
-            height: availableHeight * 0.2,
+            height: availableHeight * 0.3,
             child: Chart(expenseController: _expenseController),
           ),
           SizedBox(
-            height: availableHeight * 0.8,
+            height: availableHeight * 0.7,
             child: ExpensesList(expenseController: _expenseController),
           ),
         ],

@@ -44,11 +44,14 @@ class _ChartState extends State<Chart> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: _groupedExpenses
-              .map((e) => ChartBar(
-                    value: e['value'] as double,
-                    label: e['day'].toString(),
-                    percentage:
-                        double.parse(e['value'].toString()) / weekValueTotal,
+              .map((e) => Flexible(
+                    fit: FlexFit.tight,
+                    child: ChartBar(
+                      value: e['value'] as double,
+                      label: e['day'].toString(),
+                      percentage:
+                          double.parse(e['value'].toString()) / weekValueTotal,
+                    ),
                   ))
               .toList(),
         ),

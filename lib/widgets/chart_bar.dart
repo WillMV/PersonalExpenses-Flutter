@@ -16,11 +16,11 @@ class ChartBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) => Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
             height: constraints.maxHeight * 0.15,
             child: FittedBox(
-              fit: BoxFit.cover,
               child: Text('\$${value.toStringAsFixed(2)}'),
             ),
           ),
